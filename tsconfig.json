@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    /* Répertoires */
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    /* Environnement Node.js */
+    "module": "commonjs",
+    "target": "es2016",
+    "esModuleInterop": true,
+
+    /* Options recommandées */
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
