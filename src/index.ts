@@ -1,12 +1,16 @@
 import express, { Express, Request, Response } from 'express';
 import pool from "./database";
 import utilisateurRoutes from "./routes/utilisateur";
+import authRoutes from "./routes/auth";
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
+
+// Déclare ta route d'authentification
+app.use("/api", authRoutes);
 
 // Routes simples
 app.get('/', (req: Request, res: Response) => {
