@@ -15,10 +15,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const database_1 = __importDefault(require("./database"));
 const utilisateur_1 = __importDefault(require("./routes/utilisateur"));
+const auth_1 = __importDefault(require("./routes/auth"));
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 // Middleware
 app.use(express_1.default.json());
+// Déclare ta route d'authentification
+app.use("/api", auth_1.default);
 // Routes simples
 app.get('/', (req, res) => {
     res.send('Hello World! in Typescript Now WITH NPM RUN');
