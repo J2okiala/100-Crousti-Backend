@@ -13,11 +13,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors")); // 👈 importe cors
 const database_1 = __importDefault(require("./database"));
 const utilisateur_1 = __importDefault(require("./routes/utilisateur"));
 const auth_1 = __importDefault(require("./routes/auth"));
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
+// ✅ Active CORS pour autoriser ton front React
+app.use((0, cors_1.default)({
+    origin: "http://localhost:5173", // ton front React
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+}));
 // Middleware
 app.use(express_1.default.json());
 // Déclare ta route d'authentification

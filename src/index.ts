@@ -1,10 +1,18 @@
 import express, { Express, Request, Response } from 'express';
+import cors from "cors"; // 👈 importe cors
 import pool from "./database";
 import utilisateurRoutes from "./routes/utilisateur";
 import authRoutes from "./routes/auth";
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
+
+// ✅ Active CORS pour autoriser ton front React
+app.use(cors({
+    origin: "http://localhost:5173", // ton front React
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+}));
 
 // Middleware
 app.use(express.json());
