@@ -6,9 +6,10 @@ import pool from "../database";
 const router = Router();
 
 router.post("/auth", async (req: Request, res: Response) => {
-    const { email, password } = req.body;
-
-    if (!email || !password) {
+    const { email, mot_de_passe } = req.body;
+    console.log(req.body)
+    console.log(email, mot_de_passe)
+    if (!email || !mot_de_passe) {
         return res.status(400).json({ message: "Email et mot de passe requis." });
     }
 
@@ -24,7 +25,7 @@ router.post("/auth", async (req: Request, res: Response) => {
         }
 
         const user = users[0];
-        const match = await bcrypt.compare(password, user.mot_de_passe);
+        const match = await bcrypt.compare(mot_de_passe, user.mot_de_passe);
 
         if (!match) {
             return res.status(401).json({ message: "Mot de passe incorrect." });

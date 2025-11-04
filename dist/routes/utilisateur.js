@@ -54,6 +54,10 @@ router.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         res.status(500).json({ error });
     }
 }));
+// Construire une nouvelle route Router Get profil ( dans cet route je demande l'email de l'utilisateur)
+router.get("/profil", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const [rows] = yield database_1.default.query("SELECT ");
+}));
 // UPDATE - Modifier un utilisateur
 router.put("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
