@@ -57,7 +57,7 @@ router.get("/:id", async (req: AuthRequest, res: Response) => {
 // Construire une nouvelle route Router Get profil ( dans cet route je demande l'email de l'utilisateur)
 router.get("/profil", async (req: AuthRequest, res: Response) => {
     // const [rows] = await pool.query("SELECT ");
-    res.json({"message de bienvenue Utilisateur!"})
+    res.json({message: "message de bienvenue Utilisateur!"})
 })
 
 // UPDATE - Modifier un utilisateur
