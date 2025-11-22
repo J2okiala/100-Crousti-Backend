@@ -1,5 +1,5 @@
 import express, { Express, Request, Response } from 'express';
-import cors from "cors"; // 👈 importe cors
+import cors from "cors";
 import pool from "./database";
 import utilisateurRoutes from "./routes/utilisateur";
 import authRoutes from "./routes/auth";
@@ -7,43 +7,43 @@ import authRoutes from "./routes/auth";
 const app: Express = express();
 const port = process.env.PORT || 3000;
 
-// ✅ Active CORS pour autoriser ton front React
 app.use(cors({
-    origin: "http://localhost:5173", // ton front React
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));
 
-// Middleware
 app.use(express.json());
 
-// Déclare ta route d'authentification
+// 🔍 DEBUG: Vérifier les imports
+console.log("Type de utilisateurRoutes:", typeof utilisateurRoutes);
+console.log("Type de authRoutes:", typeof authRoutes);
+
+// 🔍 DEBUG des requêtes
+app.use((req, res, next) => {
+    next();
+});
+
+// ROUTES
 app.use("/api", authRoutes);
 
-// Routes simples
+app.use("/api/utilisateurs", utilisateurRoutes);
+
 app.get('/', (req: Request, res: Response) => {
-    res.send('Hello World! in Typescript Now WITH NPM RUN');
-});
-app.get('/login', (req: Request, res: Response) => {
-    res.send('Connexion réussie');
+    res.send('Hello World!');
 });
 
-// Routes CRUD
-app.use("/utilisateurs", utilisateurRoutes);
-
-// Lancement du serveur
 app.listen(port, () => {
-    console.log(`🚀 Serveur lancé sur http://localhost:${port}`);
+    console.log(`\n Serveur lancé sur http://localhost:${port}`);
+    console.log(` Route /api/utilisateurs devrait être accessible`);
 });
 
-// Vérif de la connexion MySQL
 async function main() {
     try {
         const [rows] = await pool.query("SELECT NOW() as currentTime");
-        console.log("✅ Connexion réussie à MySQL !");
-        console.log(rows);
+        console.log("\n Connexion réussie à MySQL !");
     } catch (err) {
-        console.error("❌ Erreur de connexion :", err);
+        console.error(" Erreur de connexion :", err);
     }
 }
 main();
